@@ -26,15 +26,46 @@ class BarangController extends Controller {
 
 	public function inbar(Request $request)
 	{
-		$barang = new \App\Barang;
-		$barang->kode_barang = $request->kode_barang;
-		$barang->nama_barang = $request->nama_barang;
-		$barang->harga_modal = $request->harga_modal;
-		$barang->harga_jual = $request->harga_jual;		
-		$barang->stok = $request->stok;		
-		$barang->kategori_barang = $request->kategori_barang;
-		$barang->save();
-		return redirect('/databarang');
+		// dd($request->all());
+		// $this->validate($request->all(), [
+		// 	'harga_modal' => 'greater_than:harga_jual',
+		// ]);
+		// $this->validate($request, [
+  //       		'harga_jual' => 'greater_than:harga_modal',
+  //   	]);
+		if ($request->harga_jual > $request->harga_modal) {
+			$barang = new \App\Barang;
+			$barang->kode_barang = $request->kode_barang;
+			$barang->nama_barang = $request->nama_barang;
+			$barang->harga_modal = $request->harga_modal;
+			$barang->harga_jual = $request->harga_jual;		
+			$barang->stok = $request->stok;		
+			$barang->kategori_barang = $request->kategori_barang;
+			$barang->save();
+			return redirect('/databarang');
+		} else {
+			session()->put('error', 'Harga jual kurang dari harga modal!');
+			return redirect(url('inbarang'))->withInput($request->all());
+		}
+
+
+
+		// $validation = \Validator::make($request->all(), ['field2' => 'greater_than:field1']);
+		// if ($validation->success()) {
+		// 	echo "success";
+		// } else {
+		// 	echo "fail";
+		// }
+
+		// $barang = new \App\Barang;
+		// $barang->kode_barang = $request->kode_barang;
+		// $barang->nama_barang = $request->nama_barang;
+		// $barang->harga_modal = $request->harga_modal;
+		// $barang->harga_jual = $request->harga_jual;		
+		// $barang->stok = $request->stok;		
+		// $barang->kategori_barang = $request->kategori_barang;
+		// $barang->save();
+		// return redirect('/databarang');
 	}
 	public function hapus($id)
 	{

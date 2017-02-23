@@ -79,28 +79,35 @@
                                        <input type="hidden" name="kode_barang" value="{{ $randomkode }}" />
                                     </div>
                                 </div>
+                                <div class="col-sm-6 pull-right">                                  
+                                </div>
                                 <div class="control-group ">
                                     <label for="lastname" class="control-label">Nama Handphone</label>
                                     <div class="controls">
-                                      <input style="width:250px;" type="text" name="nama_barang" />
+                                      <input style="width:250px;" type="text" name="nama_barang" value="{{ old('nama_barang') }}" />
                                     </div>
                                 </div>
                                 <div class="control-group ">
                                     <label for="username" class="control-label">Harga Modal</label>
                                     <div class="controls">
-                                      <input style="width:250px;" type="text" name="harga_modal" />
+                                      <input style="width:250px;" type="number" name="harga_modal" value="{{ old('harga_modal') }}"/>
                                     </div>  
                                 </div>
                                 <div class="control-group ">
                                     <label for="password" class="control-label">Harga Jual</label>
                                     <div class="controls">
-                                        <input style="width:250px;" type="text" name="harga_jual" />
+                                        <input style="width:250px;" type="number" name="harga_jual" value="{{ old('harga_jual') }}"/>
+                                        <div style="color: red;">
+                                        @if(session('error'))
+                                      {{session()->pull('error')}}
+                                  @endif
+                                        </div>
                                     </div>
                                 </div>                               
                                 <div class="control-group ">
                                     <label for="email" class="control-label">Stok</label>
                                     <div class="controls">
-                                        <input style="width:250px;" type="text" name="stok" />
+                                        <input style="width:250px;" type="text" name="stok" value="{{ old('stok') }}"/>
                                     </div>
                                 </div>                                
                                 <div class="control-group ">
